@@ -14,7 +14,7 @@
  *      - Customer bolte hain "152.50" as string — parseFloat() se number banao
  *      - Agar result NaN hai ya fareString string nahi hai, return -1
  *      - Example: parseFare("152.50") => 152.5
- *      - Example: parseFare("abc") => -1
+ *      
  *
  *   2. roundFare(amount, decimalPlaces)
  *      - .toFixed(decimalPlaces) se fare round karo
@@ -52,20 +52,51 @@
  */
 export function parseFare(fareString) {
   // Your code here
-}
+  if(typeof (fareString)!= "string") return -1
+  let result=parseFloat(fareString)
+  if(isNaN(result)) return -1
+  return result
 
+}
 export function roundFare(amount, decimalPlaces) {
   // Your code here
+  if((isNaN(amount)) || decimalPlaces<0 || !Number.isInteger(decimalPlaces)) return ""
+  let result= amount.toFixed(decimalPlaces)
+  return result
 }
 
 export function calculateSurge(baseFare, surgeMultiplier) {
   // Your code here
+  
+  if(baseFare<0||surgeMultiplier<0 || typeof baseFare != "number" || typeof surgeMultiplier != "number" ) return 0
+  return Math.ceil(baseFare*surgeMultiplier)
 }
 
 export function findCheapestAndCostliest(...fares) {
   // Your code here
+  // let allFares=[...fares]
+  // let ValidFares=allFares.some((el) => isNaN(el))
+  // // console.log(is)
+  // if(isArrayNotValid) return null
+  // if(allFares.length==0 ) return null
+  // let max= Math.max(...allFares)
+  // let min= Math.min(...allFares)
+  // return {cheapest:min, costliest:max}
+  let allFares=[...fares]
+  if(allFares.includes(undefined)) return null
+  let ValidFares=allFares.filter((el) => !(isNaN(el)||el==null||el<0))
+  // console.log(is)
+  // if(ValidFares.+) return null
+  if(allFares.length==0 ) return null
+  let max= Math.max(...ValidFares)
+  let min= Math.min(...ValidFares)
+  return {cheapest:min, costliest:max}
 }
-
+console.log(findCheapestAndCostliest(9,10,11,"a",null,undefined))
 export function getDistanceDifference(from, to) {
   // Your code here
+  const result= Math.abs(parseInt(from)- parseInt(to))
+  return isNaN(result)?-1:result
+
 }
+console.log(getDistanceDifference(5,5))
