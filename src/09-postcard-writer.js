@@ -79,20 +79,28 @@ export function isValidPincode(code) {
 
 export function formatPostcardField(label, value, width) {
   // Your code here
-  if(typeof label != "string") return ""
+  if(typeof label != "string" || typeof value != "string") return ""
   return label.padEnd(width?width:12) + ": " + value
 }
 
 export function isFromState(address, stateCode) {
   // Your code here
-  if(typeof address != "string" || typeof stateCode !="string")
+  if(typeof address != "string" || typeof stateCode !="string") return false
+    console.log(address.endsWith(stateCode))
     return address.endsWith(stateCode)
+  
 }
-
+isFromState()
 export function countVowels(message) {
   // Your code here
+  let vowelCount=0
   let regex=/[aeiouAEIOU]/g
-  if(typeof message != "string") return 0
-  return regex.test(message)
+  if(typeof message != "string" || message.length==0) return 0
+  message.split("").forEach(element => {
+    if(element.match(regex))
+       vowelCount++
+  }); 
+  return vowelCount
 
 }
+console.log(countVowels("sAim"))
