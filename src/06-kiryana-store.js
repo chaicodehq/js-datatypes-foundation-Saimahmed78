@@ -72,13 +72,12 @@ export function calculateTotal(items) {
 
 export function sortByPrice(items, ascending) {
   // Your code here
-  if(!Array.isArray(items) || items.length==0) return 0
-  (...items).sort((a,b)=>ascending ? a.price-b.price : b.price-a.price)
+  if(!Array.isArray(items) || items.length==0) return []
+  return [...items].sort((a,b)=>ascending ? a.price-b.price : b.price-a.price)
 }
 
 export function formatBill(items) {
   // Your code here
-  items.map((el)=>
-    `${el.name}  = as
-)
+  if(!Array.isArray(items) || items.length===0 ) return ""
+  return items.map((item=> (`${item.name} x ${item.qty} = Rs.${item.price * item.qty}`))).join("\n")
 }
